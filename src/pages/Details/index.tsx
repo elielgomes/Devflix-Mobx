@@ -1,26 +1,27 @@
 import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useLocalObservable, observer } from "mobx-react-lite";
-import { Store } from "../../store";
+import { Store } from "./store";
+
+//Components
+import BannerMovie from "../../components/Cards/BannerMovie";
 
 const Details: React.FC = () => {
+  const baseUrlImage = import.meta.env.VITE_BASE_URL_IMAGE;
 
-    const store = useLocalObservable(() => new Store());
+  const store = useLocalObservable(() => new Store());
 
-    const { id } = useParams();
-    const navigate = useNavigate();
+  const { id } = useParams();
 
-    useEffect(()=>{
-        store.actionGetMovie(`${id}`);
-    },[])
+  useEffect(() => {
+    store.fetchMovie(`${id}`);
+  }, []);
 
-    return(
-        <>
-        {store.movie &&
-            <span>{store.movie.title}</span>
-        }
-        </>
-    )
-}
+  return (
+    <>
+      <BannerMovie imageUrl={`${baseUrlImage}${store.movie.poster_path}`} />
+    </>
+  );
+};
 
 export default observer(Details);

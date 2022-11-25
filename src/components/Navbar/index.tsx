@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLocalObservable, observer } from "mobx-react-lite";
-import { Store } from "../../store";
+import { Link as ReactLink, useNavigate } from "react-router-dom";
 import useDebounce from "../../hooks/useDebounce";
+import { useLocalObservable, observer } from "mobx-react-lite";
+import { Store } from "./store";
 
 //Import Components Chakra UI
-import { Input } from "@chakra-ui/react";
+import { Input, Flex, Box, Image, Link} from "@chakra-ui/react";
 
 const Navbar: React.FC = () => {
   const store = useLocalObservable(() => new Store());
@@ -14,22 +14,46 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     if (!debounceValue || !debounceValue.trim()) return;
-
-    store.actionGetSearchMovie(debounceValue, 1);
     navigate(`/search?q=${debounceValue}`);
   }, [debounceValue]);
 
   return (
     <>
-      <Input
-        placeholder="Search your movies"
-        htmlSize={22}
-        width="auto"
-        value={store.search}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          store.actionSearch(e.target.value)
-        }
-      />
+      <Box
+        height={"80px"}
+        bg={"secondary.200"}
+        position={"fixed"}
+        w={"100vw"}
+        zIndex={1}
+      >
+        <Flex
+          as={"nav"}
+          h={"100%"}
+          margin={"auto"}
+          align={"center"}
+          justifyContent={"space-between"}
+          gap={"20px"}
+          maxW={"1500px"}
+        >
+          <Link as={ReactLink} to={"/"} ml={"40px"}>
+            <Image src={"/assets/image/DEVFLIX-brand-sm.png"} />
+          </Link>
+
+          <Box mr={"30px"}>
+            <Input
+              variant={"fill"}
+              type={"search"}
+              placeholder={"Busque seus filmes favoritos"}
+              width={"300px"}
+              p={"10px"}
+              value={store.search}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                store.setSearch(e.target.value)
+              }
+            />
+          </Box>
+        </Flex>
+      </Box>
     </>
   );
 };
