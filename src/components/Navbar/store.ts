@@ -1,16 +1,16 @@
 import { action, makeObservable, observable } from "mobx";
 
 export class Store {
-  constructor() {
-    makeObservable(this, {
-      search: observable,
-      setSearch: action,
-    });
-  }
+	constructor() {
+		makeObservable(this, {
+			search: observable,
+			setSearch: action,
+		});
+	}
 
-  search: string = "";
+	public search = "";
 
-  setSearch = (value: string) => {
-    this.search = value;
-  };
+	public setSearch = (value: string) => {
+		this.search = value;
+	};
 }
