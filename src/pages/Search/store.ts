@@ -7,21 +7,33 @@ export class Store {
 	constructor() {
 		makeObservable(this, {
 			page: observable,
+			random: observable,
 			movieListSearch: observable,
 			genreList: observable,
 			setMovieListSearch: action,
 			fetchSearchMovie: action,
+			setRandomImage: action,
 			setGenreList: action,
+			setPage: action,
 			fetchGenreList: action,
 		});
 	}
 
 	public page = 1;
+	public random = 0;
 	public movieListSearch: IMovieList = {} as IMovieList;
 	public genreList: IGenres[] = [{}] as IGenres[];
 
+	public setRandomImage(results: number) {
+		this.random = Math.floor(Math.random() * results);
+	}
+
 	public setGenreList(genres: IGenres[]) {
 		this.genreList = genres;
+	}
+
+	public setPage(page: number) {
+		this.page = page;
 	}
 
 	public setMovieListSearch(movies: IMovieList) {
@@ -41,6 +53,7 @@ export class Store {
 		try {
 			const response = await GetSearchMovies(query, page);
 			this.setMovieListSearch(response.data);
+			this.setRandomImage(response.data.results.length);
 		} catch (error) {
 			console.log(error);
 		}

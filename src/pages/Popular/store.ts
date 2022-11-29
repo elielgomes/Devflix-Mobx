@@ -19,8 +19,8 @@ export class Store {
 	}
 
 	public page = 1;
-	public popularMovieList: IMovieList | null = null;
 	public random = 0;
+	public popularMovieList: IMovieList | null = null;
 	public genreList: IGenres[] = [{}] as IGenres[];
 
 	public setPage(page: number){

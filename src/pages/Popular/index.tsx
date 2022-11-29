@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
-import { useLocalObservable, observer } from "mobx-react-lite";
 import { Store } from "./store";
-import { Grid, Container, Button, Box } from "@chakra-ui/react";
 import useImageColor from "use-image-color";
+import { useLocalObservable, observer } from "mobx-react-lite";
+import { Grid, Container, Box, Flex } from "@chakra-ui/react";
+import Loader from "../../components/Loader";
 import MovieCard from "../../components/Cards/MovieCard";
 import MainBanner from "../../components/Cards/MainBanner";
-import Loader from "../../components/Loader";
+import Pagination from "../../components/Buttons/Pagination";
 
 const Popular = () => {
 	const store = useLocalObservable(() => new Store());
-	const baseUrlImage1280p = import.meta.env.VITE_BASE_URL_IMAGE_FULL;
 	const baseUrlImage = import.meta.env.VITE_BASE_URL_IMAGE;
+	const baseUrlImage1280p = import.meta.env.VITE_BASE_URL_IMAGE_FULL;
 
 	useEffect(() => {
 		store.fetchPopularMovieList(store.page);
@@ -58,7 +59,7 @@ const Popular = () => {
 							maxW="1500px"
 							p="150px 50px"
 						>
-							<Button onClick={() => store.setPage(store.page + 1)}>Pagina</Button>
+
 							<Grid templateColumns="repeat(auto-fit, minmax(250px, 1fr))" gap="100px 60px"  >
 								{store.genreList &&
 									store.popularMovieList?.results?.map((item) => (
@@ -77,6 +78,17 @@ const Popular = () => {
 									),
 									)}
 							</Grid>
+							<Flex justifyContent="center" p="80px 0 0">
+								<Pagination
+									maxPage={store.popularMovieList?.total_pages}
+									currentPage={store.page}
+									nextPage={store.page + 1}
+									skipPage={store.page + 2}
+									changePrevPage={() => store.setPage(store.page - 1)}
+									changeNextPage={() => store.setPage(store.page + 1)}
+									changeSkipPage={() => store.setPage(store.page + 2)}
+								/>
+							</Flex>
 						</Container>
 					</Box>
 				</>

@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
-import { useLocalObservable, observer } from "mobx-react-lite";
-import useImageColor from "use-image-color";
 import { Store } from "./store";
-import MainBanner from "../../components/Cards/MainBanner";
+import useImageColor from "use-image-color";
+import { useLocalObservable, observer } from "mobx-react-lite";
 import { Container, Box } from "@chakra-ui/react";
 import Loader from "../../components/Loader";
 import Slider from "../../components/Slider";
+import MainBanner from "../../components/Cards/MainBanner";
 
 const Home: React.FC = () => {
-	const baseUrlImage1280p = import.meta.env.VITE_BASE_URL_IMAGE_FULL;
 	const store = useLocalObservable(() => new Store());
+	const baseUrlImage1280p = import.meta.env.VITE_BASE_URL_IMAGE_FULL;
 
 	useEffect(() => {
 		store.fetchMovieList(1);

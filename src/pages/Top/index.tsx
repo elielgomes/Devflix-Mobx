@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { useLocalObservable, observer } from "mobx-react-lite";
 import { Store } from "./store";
-import { Grid, Container, Button, Box } from "@chakra-ui/react";
 import useImageColor from "use-image-color";
+import { useLocalObservable, observer } from "mobx-react-lite";
+import { Grid, Container, Button, Box, Flex } from "@chakra-ui/react";
+import Loader from "../../components/Loader";
 import MovieCard from "../../components/Cards/MovieCard";
 import MainBanner from "../../components/Cards/MainBanner";
-import Loader from "../../components/Loader";
+import Pagination from "../../components/Buttons/Pagination";
 
 const Top = () => {
 	const store = useLocalObservable(() => new Store());
@@ -77,6 +78,17 @@ const Top = () => {
 									),
 									)}
 							</Grid>
+							<Flex justifyContent="center" p="80px 0 0">
+								<Pagination
+									maxPage={store.topMovieList?.total_pages}
+									currentPage={store.page}
+									nextPage={store.page + 1}
+									skipPage={store.page + 2}
+									changePrevPage={() => store.setPage(store.page - 1)}
+									changeNextPage={() => store.setPage(store.page + 1)}
+									changeSkipPage={() => store.setPage(store.page + 2)}
+								/>
+							</Flex>
 						</Container>
 					</Box>
 				</>

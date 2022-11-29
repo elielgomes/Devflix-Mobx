@@ -20,7 +20,6 @@ export interface IMovie {
 	runtime: number;
 	genres: IGenres[];
 	genre_ids: number[];
-	// tagline: string;
 }
 
 export interface IMovieList {
@@ -31,23 +30,3 @@ export interface IMovieList {
 export interface ITrailer {
 	results: [{ key: string }];
 }
-
-// export interface ITvShow {
-// 	id: string;
-// 	name: string;
-// 	poster_path: string;
-// 	backdrop_path: string;
-// 	overview: string;
-// 	first_air_date: string;
-// 	genres: IGenres[];
-// 	genre_ids: number[];
-// 	release_date: string;
-// 	vote_average: number;
-// 	title: string;
-
-// }
-
-// export interface ITvShowList {
-// 	results: ITvShow[];
-// 	total_pages: number;
-// }
