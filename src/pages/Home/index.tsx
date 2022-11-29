@@ -3,17 +3,18 @@ import { useLocalObservable, observer } from "mobx-react-lite";
 import useImageColor from "use-image-color";
 import { Store } from "./store";
 import MainBanner from "../../components/Cards/MainBanner";
-import MovieCard from "../../components/Cards/MovieCard";
-import { Container, Grid, Box } from "@chakra-ui/react";
+import { Container, Box } from "@chakra-ui/react";
 import Loader from "../../components/Loader";
+import Slider from "../../components/Slider";
 
 const Home: React.FC = () => {
-	const baseUrlImage = import.meta.env.VITE_BASE_URL_IMAGE;
 	const baseUrlImage1280p = import.meta.env.VITE_BASE_URL_IMAGE_FULL;
 	const store = useLocalObservable(() => new Store());
 
 	useEffect(() => {
 		store.fetchMovieList(1);
+		store.fetchTopMovieList(1);
+		store.fetchUpComingMovieList(1);
 		store.fetchGenreList();
 		store.setRandomImage();
 	}, []);
@@ -24,7 +25,7 @@ const Home: React.FC = () => {
 		, { cors: true, colors: 2 });
 
 	return (
-		!store.movieList?.results
+		!store.movieList?.results && !store.topMovieList?.results
 			? (
 				<Container
 					h="100vh"
@@ -37,11 +38,16 @@ const Home: React.FC = () => {
 			)
 			: (
 				<>
-					<Box h="100%" w="100%" bgColor={colors && colors[0]}>
+					<Box
+						p="0 0 150px"
+						h="100%"
+						w="100%"
+						bgColor={colors && colors[0]}
+					>
 
 						<MainBanner
-							idMovie={`${store.movieList.results[store.movieList.results[store.random].backdrop_path ? store.random : 0].id}`}
-							titleMovie={`${store.movieList.results[store.movieList.results[store.random].backdrop_path ? store.random : 0].title}`}
+							idMovie={`${store.movieList?.results[store.movieList.results[store.random].backdrop_path ? store.random : 0].id}`}
+							titleMovie={`${store.movieList?.results[store.movieList.results[store.random].backdrop_path ? store.random : 0].title}`}
 							genreMovie={
 								store.genreList?.filter((e) => (
 									e.id === store.movieList?.results[store.movieList.results[store.random].backdrop_path
@@ -53,28 +59,45 @@ const Home: React.FC = () => {
 								))
 							}
 							bgColorLoad={colors && colors[0]}
-							imageUrl={`${baseUrlImage1280p}${store.movieList.results[store.movieList.results[store.random].backdrop_path ? store.random : 0].backdrop_path}`}
+							imageUrl={`${baseUrlImage1280p}${store.movieList?.results[store.movieList.results[store.random].backdrop_path ? store.random : 0].backdrop_path}`}
 						/>
+						<Container
+							maxW="1500px"
+							px="50px"
+							py="100px"
+							display="flex"
+							flexDirection="column"
+							gap="150px"
+						>
+							<Box>
+								<Slider
+									urlSection="/top"
+									titleSection="Top Movies"
+									color={colors && colors[0]}
+									genreList={store.genreList && store.genreList}
+									movieListSlider={store.topMovieList && store.topMovieList}
+								/>
+							</Box>
 
-						<Container maxW="1500px" px="50px" py="100px" >
-							<Grid templateColumns="repeat(auto-fit, minmax(250px, 1fr))" gap="100px 60px"  >
-								{store.genreList &&
-									store.movieList.results?.map((item) => (
-										<MovieCard
-											key={item.id}
-											title={item.title}
-											id={item.id}
-											imageUrl={`${baseUrlImage}${item.poster_path}`}
-											genre={store.genreList?.find((e) => e.id === item.genre_ids[0])?.name === "Triller"
-												? "Suspense"
-												: store.genreList?.find((e) => e.id === item.genre_ids[0])?.name}
-											releaseDate={String(new Date(item.release_date).getFullYear())}
-											voteAverage={`${item.vote_average}`}
-											color={colors && colors[0]}
-										/>
-									),
-									)}
-							</Grid>
+							<Box>
+								<Slider
+									urlSection="/popular"
+									titleSection="Popular Movies"
+									color={colors && colors[0]}
+									genreList={store.genreList && store.genreList}
+									movieListSlider={store.movieList && store.movieList}
+								/>
+							</Box>
+
+							<Box>
+								<Slider
+									urlSection="/upcoming"
+									titleSection="Upcoming Movies"
+									color={colors && colors[0]}
+									genreList={store.genreList && store.genreList}
+									movieListSlider={store.upComingMovieList && store.upComingMovieList}
+								/>
+							</Box>
 						</Container>
 					</Box>
 				</>
@@ -83,3 +106,22 @@ const Home: React.FC = () => {
 };
 
 export default observer(Home);
+
+{/* <Grid templateColumns="repeat(auto-fit, minmax(250px, 1fr))" gap="100px 60px"  >
+{store.genreList &&
+	store.movieList?.results?.map((item) => (
+		<MovieCard
+			key={item.id}
+			title={item.title}
+			id={item.id}
+			imageUrl={`${baseUrlImage}${item.poster_path}`}
+			genre={store.genreList?.find((e) => e.id === item.genre_ids[0])?.name === "Triller"
+				? "Suspense"
+				: store.genreList?.find((e) => e.id === item.genre_ids[0])?.name}
+			releaseDate={String(new Date(item.release_date).getFullYear())}
+			voteAverage={`${item.vote_average}`}
+			color={colors && colors[0]}
+		/>
+	),
+	)}
+</Grid> */}

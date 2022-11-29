@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
 				bg="secondary.300"
 				position="fixed"
 				w="100vw"
-				zIndex={1}
+				zIndex={99}
 			>
 				<Flex
 					as="nav"

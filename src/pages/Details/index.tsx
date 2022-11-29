@@ -100,9 +100,26 @@ const Details: React.FC = () => {
 								right="-200px"
 							>
 								<Text color="primary.50" fontSize="30px" fontWeight="bold">{`${votePorcent}%`}</Text>
-								<Flex alignItems="flex-start" justifyContent="center" gap="25px">
-									<Text fontSize="60px">{store.movie.title}</Text>
-									<Text fontSize="60px" fontWeight="light">{String(new Date(store.movie.release_date).getFullYear())}</Text>
+								<Flex
+									justifyContent="space-between"
+									gap="25px"
+									w="100%"
+									alignItems="flex-start"
+								>
+									<Text
+										fontSize="30px"
+										textAlign="start"
+										maxW="400px"
+										textShadow="0px 0px 3px #000"
+									>{store.movie.title}
+									</Text>
+									<Text
+										fontSize="40px"
+										fontWeight="light"
+										color="secondary.50"
+										textShadow="0px 0px 3px #000"
+									>{String(new Date(store.movie.release_date).getFullYear())}
+									</Text>
 								</Flex>
 
 								<List display="flex" gap="30px">
@@ -110,12 +127,13 @@ const Details: React.FC = () => {
 										<ListItem
 											key={genre.id}
 											color="secondary.50"
-											fontSize="20px"
+											fontSize="16px"
+											textShadow="0px 0px 3px #000"
 										>{(genre.name).toLocaleUpperCase()}
 										</ListItem>
 									))}
 								</List>
-								<Text fontSize="18px" textAlign="justify">
+								<Text fontSize="16px" textAlign="justify" textShadow="0px 0px 3px #000">
 									{store.movie.overview
 										? store.movie.overview
 										: "Não conseguimos encontrar informações sobre a sinopse deste filme!"}
@@ -124,6 +142,12 @@ const Details: React.FC = () => {
 									<Button
 										variant="outline"
 										color="secondary.50"
+										_hover={{
+											transform: "scale(1.05)",
+											backgroundColor: "primary.50",
+											borderColor: "primary.50",
+											color: "#fff",
+										}}
 										onClick={store.trailer ? onOpen : () => location.href = `https://www.youtube.com/results?search_query=${store.movie?.title && store.movie?.title.replaceAll(" ", "+")}+Trailer+Oficial, _blank`}
 									>
 										<Box
@@ -134,12 +158,23 @@ const Details: React.FC = () => {
 										/>
 										Trailer
 									</Button>
-									<Button variant="outline" color="secondary.50" onClick={() => goBack()}>Voltar</Button>
+									<Button
+										variant="outline"
+										color="secondary.50"
+										onClick={() => goBack()}
+										_hover={{
+											transform: "scale(1.05)",
+											backgroundColor: "primary.50",
+											borderColor: "primary.50",
+											color: "#fff",
+										}}
+									>Voltar
+									</Button>
 								</Flex>
 							</Flex>
 						</Box>
 						<Box
-							bgImage={`linear-gradient(to left, transparent 0%,${colors && colors[0]} 100%), url(${baseUrlImage1280p}${store.movie.backdrop_path && store.movie.backdrop_path})`}
+							bgImage={`linear-gradient(to left, transparent 0%,${colors && colors[0]} 100%), url(${baseUrlImage1280p}${store.movie.backdrop_path ? store.movie.backdrop_path : store.movie.poster_path})`}
 							bgRepeat="no-repeat"
 							bgSize="cover"
 							bgPosition="center"
@@ -150,7 +185,7 @@ const Details: React.FC = () => {
 							w="60vw"
 							flexDirection="column"
 						/>
-					</Flex>
+					</Flex >
 				</>
 			)
 	);

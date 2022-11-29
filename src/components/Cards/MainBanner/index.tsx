@@ -6,7 +6,7 @@ interface IProps {
 	imageUrl: string;
 	bgColorLoad: string;
 	titleMovie: string;
-	genreMovie?: Array<{ id: number; name: string }>;
+	genreMovie: Array<{ id: number; name: string }>;
 	idMovie: string;
 }
 
@@ -37,7 +37,7 @@ const MainBanner: React.FC<IProps> = (props) => (
 				gap="20px"
 			>
 				<Text fontSize="30px" textAlign="center">{props.titleMovie}</Text>
-				<Text>{props.genreMovie && `${props.genreMovie[0]?.name} | ${props.genreMovie[1]?.name}`}</Text>
+				<Text>{props.genreMovie[1]?.name ? `${props.genreMovie[0]?.name} | ${props.genreMovie[1]?.name }` : `${props.genreMovie[0]?.name}` }</Text>
 				<Text textShadow="0x 0px 10px #000" fontSize="20px">Watch Devflix movies & TV shows online or stream right to your smart TV, game console, PC, Mac, mobile, tablet and more.</Text>
 				<Link
 					as={ReactLink}
