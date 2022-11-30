@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
 
 	return (
 		<>
-			<Box bgColor="secondary.300" maxH="450px" >
+			<Box bgColor="secondary.300" maxH="600px">
 				<Container maxW="1500px" pt="40px" >
 					<Box>
 						<Image

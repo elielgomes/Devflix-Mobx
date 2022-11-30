@@ -73,7 +73,12 @@ const Search: React.FC = () => {
 								color="secondary.100"
 							><Box as={FaSearch} pr="10px" />{store.movieListSearch.results?.length !== 0 ? `Resultados para: ${query}` : `Nenhum Resultado para: ${query}`}
 							</Heading>
-							<Grid templateColumns="repeat(auto-fit, minmax(250px, 1fr))" gap="100px 60px"  >
+							<Grid
+								templateColumns="repeat(auto-fit, minmax(250px, 1fr))"
+								justifyContent="center"
+								alignItems="center"
+								gap="100px 60px"
+							>
 								{store.genreList &&
 									store.movieListSearch.results?.map((item) => (
 										<MovieCard

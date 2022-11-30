@@ -1,22 +1,21 @@
-import React, {useEffect } from "react";
-import  {Link as ReactLink, useNavigate } from "react-router-dom";
+import React, { useEffect, useContext } from "react";
+import { Link as ReactLink, useNavigate } from "react-router-dom";
 import useDebounce from "../../hooks/useDebounce";
-import { useLocalObservable, observer } from "mobx-react-lite";
-import { Store } from "./store";
 
 import { Input, Flex, Box, Image, Link } from "@chakra-ui/react";
+import { ISearchInput, SearchInputContext } from "../../contexts/SearchInput";
 
 const Navbar: React.FC = () => {
-	const store = useLocalObservable(() => new Store());
 	const navigate = useNavigate();
-	const debounceValue: string = useDebounce(store.search, 2000);
+	const { searchInput, setSearchInput } = useContext(SearchInputContext) as ISearchInput;
+	const debounceValue: string = useDebounce(searchInput, 2000);
 
 	useEffect(() => {
-		if (!debounceValue || !debounceValue.trim()){
+		if (!debounceValue || !debounceValue.trim()) {
 			return;
 		}
 		navigate(`/search?q=${debounceValue}`);
-		store.setSearch("");
+		setSearchInput("");
 	}, [debounceValue]);
 
 	return (
@@ -38,7 +37,10 @@ const Navbar: React.FC = () => {
 					maxW="1500px"
 				>
 					<Link as={ReactLink} to="/" ml="40px">
-						<Image src="/assets/image/DEVFLIX-brand-sm.png" />
+						<Image
+							w={{sm:"70px", md: "90px", lg: "initial"}}
+							src="/assets/image/DEVFLIX-brand-sm.png"
+						/>
 					</Link>
 
 					<Box mr="30px">
@@ -46,10 +48,10 @@ const Navbar: React.FC = () => {
 							variant="fill"
 							type="search"
 							placeholder="Busque seus filmes favoritos"
-							width="300px"
+							width={{ sm: "120px", md: "160px", lg: "250px"}}
 							p="10px"
-							value={store.search}
-							onChange={(e: React.ChangeEvent<HTMLInputElement>) => store.setSearch(e.target.value)}
+							value={searchInput}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)}
 						/>
 					</Box>
 				</Flex>
@@ -58,4 +60,4 @@ const Navbar: React.FC = () => {
 	);
 };
 
-export default observer(Navbar);
+export default Navbar;

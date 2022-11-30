@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Store } from "./store";
 import useImageColor from "use-image-color";
 import { useLocalObservable, observer } from "mobx-react-lite";
-import { Grid, Container, Button, Box, Flex } from "@chakra-ui/react";
+import { Grid, Container, Box, Flex } from "@chakra-ui/react";
 import Loader from "../../components/Loader";
 import MovieCard from "../../components/Cards/MovieCard";
 import MainBanner from "../../components/Cards/MainBanner";
@@ -59,8 +59,12 @@ const Top = () => {
 							maxW="1500px"
 							p="150px 50px"
 						>
-							<Button onClick={() => store.setPage(store.page + 1)}>Pagina</Button>
-							<Grid templateColumns="repeat(auto-fit, minmax(250px, 1fr))" gap="100px 60px"  >
+							<Grid
+								templateColumns="repeat(auto-fit, minmax(250px, 1fr))"
+								justifyContent="center"
+								alignItems="center"
+								gap="100px 60px"
+							>
 								{store.genreList &&
 									store.topMovieList?.results?.map((item) => (
 										<MovieCard

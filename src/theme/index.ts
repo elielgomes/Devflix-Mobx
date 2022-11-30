@@ -9,11 +9,24 @@ export const transitions = {
 const customTheme = extendTheme({
 	styles: {
 		global: {
-			body: {
+			"html": {
+				scrollBehavior: "smooth",
+			},
+			"body": {
 				backgroundColor: "#000",
 				fontFamily: "'Roboto', sans-serif",
 			},
-			svg: {
+			"body::-webkit-scrollbar": {
+				width: "5px",
+			},
+			"body::-webkit-scrollbar-track": {
+				background: "transparent",
+			},
+			"body::-webkit-scrollbar-thumb": {
+				backgroundColor: "#e50914",
+				borderRadius: "20px",
+			},
+			"svg": {
 				display: "inline-block",
 			},
 		},
@@ -34,6 +47,13 @@ const customTheme = extendTheme({
 	components: {
 		Text,
 		Button,
+	},
+	breakpoints: {
+		"sm": "320px",
+		"md": "425px",
+		"lg": "768px",
+		"xl": "1024px",
+		"2x1": "1536px",
 	},
 });
 

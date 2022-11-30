@@ -60,7 +60,12 @@ const Upcoming = () => {
 							maxW="1500px"
 							p="150px 50px"
 						>
-							<Grid templateColumns="repeat(auto-fit, minmax(250px, 1fr))" gap="100px 60px"  >
+							<Grid
+								templateColumns="repeat(auto-fit, minmax(250px, 1fr))"
+								justifyContent="center"
+								alignItems="center"
+								gap="100px 60px"
+							>
 								{store.genreList &&
 									store.upcomingMovieList?.results?.map((item) => (
 										<MovieCard

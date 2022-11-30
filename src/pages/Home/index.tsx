@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { Store } from "./store";
 import useImageColor from "use-image-color";
 import { useLocalObservable, observer } from "mobx-react-lite";
@@ -11,7 +11,7 @@ const Home: React.FC = () => {
 	const store = useLocalObservable(() => new Store());
 	const baseUrlImage1280p = import.meta.env.VITE_BASE_URL_IMAGE_FULL;
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		store.fetchMovieList(1);
 		store.fetchTopMovieList(1);
 		store.fetchUpComingMovieList(1);
@@ -19,9 +19,10 @@ const Home: React.FC = () => {
 		store.setRandomImage();
 	}, []);
 
+
 	const { colors } = useImageColor(
 		store.movieList?.results
-		&& `${baseUrlImage1280p}${store.movieList.results[store.random].poster_path}`
+		&& `${baseUrlImage1280p}${store.movieList?.results[store.random].poster_path}`
 		, { cors: true, colors: 2 });
 
 	return (
@@ -106,22 +107,3 @@ const Home: React.FC = () => {
 };
 
 export default observer(Home);
-
-{/* <Grid templateColumns="repeat(auto-fit, minmax(250px, 1fr))" gap="100px 60px"  >
-{store.genreList &&
-	store.movieList?.results?.map((item) => (
-		<MovieCard
-			key={item.id}
-			title={item.title}
-			id={item.id}
-			imageUrl={`${baseUrlImage}${item.poster_path}`}
-			genre={store.genreList?.find((e) => e.id === item.genre_ids[0])?.name === "Triller"
-				? "Suspense"
-				: store.genreList?.find((e) => e.id === item.genre_ids[0])?.name}
-			releaseDate={String(new Date(item.release_date).getFullYear())}
-			voteAverage={`${item.vote_average}`}
-			color={colors && colors[0]}
-		/>
-	),
-	)}
-</Grid> */}

@@ -23,7 +23,6 @@ export const Text = defineStyleConfig({
 			fontFamily: "Bebas Neue, Bebas, sans-serif",
 			fontWeight: "bolder",
 			color: "rgb(229, 9, 20)",
-			fontSize: "100px",
 			letterSpacing: " 10px",
 			textShadow: " #000 2px 2px 20px",
 		},

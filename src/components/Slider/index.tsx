@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import MovieCard from "../Cards/MovieCard";
 import { Box, Button, Flex, Text, Link } from "@chakra-ui/react";
-import { IMovieList, IGenres } from "../../interfaces";
+import { IMovieList, IGenres} from "../../interfaces";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 interface IProps {
@@ -21,7 +21,6 @@ interface IProps {
 const Slider: React.FC<IProps> = (props) => {
 
 	const baseUrlImage = import.meta.env.VITE_BASE_URL_IMAGE;
-
 	const swiperRef = useRef<SwiperCore>();
 
 	return (
@@ -32,13 +31,24 @@ const Slider: React.FC<IProps> = (props) => {
 				maxW="1500px"
 				height="420px"
 			>
-				<Flex w="100%" p="30px" justifyContent="space-between">
-					<Text fontSize="30px" fontWeight="light">{props.titleSection}</Text>
+				<Flex
+					w="100%"
+					p={{sm:"0 0 20px", lg:"0 30px 20px"}}
+					justifyContent={{sm:"center", lg:"space-between"}}
+					alignItems={{sm:"center"}}
+					direction={{sm:"column", lg:"row"}}
+					gap={{sm:"15px"}}
+				>
+					<Text
+						fontSize="30px"
+						fontWeight="light"
+					>{props.titleSection}
+					</Text>
 					<Flex gap="15px">
 						<Link
 							as={ReactLink}
 							to={props.urlSection}
-							style={{textDecoration: "none"}}
+							style={{ textDecoration: "none" }}
 						>
 							<Button
 								variant="outline"

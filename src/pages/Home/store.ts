@@ -1,33 +1,27 @@
-import { action, makeObservable, observable } from "mobx";
+import { makeAutoObservable	} from "mobx";
 import GetPopularMovieList from "../../apis/getPopularMovieList";
 import GetGenreList from "../../apis/getGenreList";
 import GetTopMovieList from "../../apis/getTopMovieList";
 import GetUpComingMovieList from "../../apis/getUpComingMovies";
-import { IMovie, IMovieList, IGenres } from "../../interfaces";
+import { IMovie, IMovieList, IGenres} from "../../interfaces";
+import { PaginatedListShelf } from "@startapp/mobx-utils";
+import { AxiosResponse } from "axios";
 
 export class Store {
+
+	// public fetchPopularMovieList: PaginatedListShelf<AxiosResponse<IMovie, any>>;
+
 	constructor() {
-		makeObservable(this, {
-			loading: observable,
-			page: observable,
-			movieList: observable,
-			topMovieList: observable,
-			upComingMovieList: observable,
-			genreList: observable,
-			random: observable,
-			setRandomImage: action,
-			setLoading: action,
-			setMovieList: action,
-			setGenreList: action,
-			setTopMovieList: action,
-			setUpComingMovieList: action,
-			fetchUpComingMovieList: action,
-			fetchGenreList: action,
-			fetchMovieList: action,
-			fetchTopMovieList: action,
-		});
+		makeAutoObservable(this);
+
+		// this.fetchPopularMovieList = new PaginatedListShelf(
+		// 	 (page: number) => GetPopularMovieList(page),
+		// 	{
+		// 		fetchOnConstructor: true,
+		// 	},
+		// );
 	}
-	public loading = true;
+
 	public page = 1;
 	public movie: IMovie = {} as IMovie;
 	public movieList: IMovieList | null = null;
@@ -36,9 +30,6 @@ export class Store {
 	public random = 0;
 	public genreList: IGenres[] = [{}] as IGenres[];
 
-	public setLoading() {
-		this.loading = false;
-	}
 
 	public setRandomImage() {
 		this.random = Math.floor(Math.random() * 20);
