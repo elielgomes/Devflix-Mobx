@@ -19,13 +19,15 @@ const Home: React.FC = () => {
 		store.fetchUpcomingMovieList.fetchPage(1);
 	}, []);
 
+	window.scroll(0, 0);
+
 	const { colors } = useImageColor(
 		store.fetchPopularMovieList.items
 		&& `${baseUrlImage1280p}${store.fetchPopularMovieList.items[store.random]?.poster_path}`
 		, { cors: true, colors: 2 });
 
 	return (
-		!store.fetchPopularMovieList.items && !store.fetchTopMovieList.items
+		store.pageLoader
 			? (
 				<Container
 					h="100vh"

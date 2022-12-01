@@ -7,7 +7,7 @@ interface IProps {
 	id: string;
 	title: string;
 	imageUrl: string;
-	genre?: string;
+	genre?: string | null;
 	releaseDate: string;
 	voteAverage: string;
 	color: string;

@@ -19,13 +19,15 @@ const Top = () => {
 		store.fetchTopMovieList.fetchPage(1);
 	}, []);
 
+	window.scroll(0, 0);
+
 	const { colors } = useImageColor(
 		store.fetchTopMovieList?.items
 		&& `${baseUrlImage1280p}${store.fetchTopMovieList.items[store.random]?.poster_path}`
 		, { cors: true, colors: 2 });
 
 	return (
-		!store.fetchTopMovieList?.items
+		store.pageLoader
 			? (
 				<Container
 					h="100vh"

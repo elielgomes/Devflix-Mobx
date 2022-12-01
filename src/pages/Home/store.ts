@@ -33,12 +33,15 @@ export class Store {
 	}
 
 	public random = 0;
-	public genreList: IGenres[] = [{}] as IGenres[];
+	public genreList: IGenres[] | null = null;
 	public fetchTopMovieList: PaginatedListShelf<IMovie>;
 	public fetchPopularMovieList: PaginatedListShelf<IMovie>;
 	public fetchUpcomingMovieList: PaginatedListShelf<IMovie>;
 	public totalPages = new AttributeShelf(0);
 
+	public get pageLoader() {
+		return this.fetchPopularMovieList.loader.isLoading || this.fetchTopMovieList.loader.isLoading || this.fetchUpcomingMovieList.loader.isLoading;
+	}
 
 	public setRandomImage(results: number) {
 		this.random = Math.floor(Math.random() * results);

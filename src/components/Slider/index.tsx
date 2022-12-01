@@ -13,7 +13,7 @@ import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 interface IProps {
 	movieListSlider?: IMovie[] | null;
 	color: string;
-	genreList: IGenres[];
+	genreList: IGenres[] | null;
 	titleSection: string;
 	urlSection: string;
 }

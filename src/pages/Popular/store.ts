@@ -16,7 +16,11 @@ export class Store {
 
 	public random = 0;
 	public fetchPopularMovieList: PaginatedListShelf<IMovie>;
-	public genreList: IGenres[] = [{}] as IGenres[];
+	public genreList: IGenres[] | null = null;
+
+	public get pageLoader() {
+		return this.fetchPopularMovieList.loader.isLoading || this.genreList?.length === 0;
+	}
 
 	public setRandomImage(results: number) {
 		this.random = Math.floor(Math.random() * results);

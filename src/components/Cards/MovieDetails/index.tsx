@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 interface IProps {
 	votePorcent: string | null;
 	trailerKey?: string;
-	movie: IMovie;
+	movie: IMovie | null;
 }
 
 const MovieDetails: React.FC<IProps> = (props) => {
@@ -47,19 +47,19 @@ const MovieDetails: React.FC<IProps> = (props) => {
 						textAlign="start"
 						maxW="400px"
 						textShadow="0px 0px 3px #000"
-					>{props.movie.title}
+					>{props.movie?.title}
 					</Text>
 					<Text
 						fontSize="40px"
 						fontWeight="light"
 						color="secondary.50"
 						textShadow="0px 0px 3px #000"
-					>{String(new Date(props.movie.release_date).getFullYear())}
+					>{String(props.movie && new Date(props.movie.release_date).getFullYear())}
 					</Text>
 				</Flex>
 
 				<List display="flex" gap="30px">
-					{props.movie.genres && props.movie.genres?.map((genre) => (
+					{props.movie?.genres && props.movie?.genres?.map((genre) => (
 						<ListItem
 							key={genre.id}
 							color="secondary.50"
@@ -70,8 +70,8 @@ const MovieDetails: React.FC<IProps> = (props) => {
 					))}
 				</List>
 				<Text fontSize="16px" textAlign="justify" textShadow="0px 0px 3px #000">
-					{props.movie.overview
-						? props.movie.overview
+					{props.movie?.overview
+						? props.movie?.overview
 						: "Não conseguimos encontrar informações sobre a sinopse deste filme!"}
 				</Text>
 				<Flex gap="40px">
@@ -86,7 +86,7 @@ const MovieDetails: React.FC<IProps> = (props) => {
 						}}
 						onClick={props.trailerKey
 							? onOpen
-							: () => window.open(`https://www.youtube.com/results?search_query=${props.movie.title && props.movie.title.replaceAll(" ", "+")}+Trailer+Oficial`)}
+							: () => window.open(`https://www.youtube.com/results?search_query=${props.movie?.title && props.movie?.title.replaceAll(" ", "+")}+Trailer+Oficial`)}
 					>
 						<Box
 							as={BsPlay}

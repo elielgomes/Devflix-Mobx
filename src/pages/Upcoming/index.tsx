@@ -19,13 +19,15 @@ const Top = () => {
 		store.fetchUpcomingMovieList.fetchPage(1);
 	}, []);
 
+	window.scroll(0, 0);
+
 	const { colors } = useImageColor(
 		store.fetchUpcomingMovieList?.items
 		&& `${baseUrlImage1280p}${store.fetchUpcomingMovieList.items[store.random]?.poster_path}`
 		, { cors: true, colors: 2 });
 
 	return (
-		!store.fetchUpcomingMovieList?.items
+		store.pageLoader
 			? (
 				<Container
 					h="100vh"

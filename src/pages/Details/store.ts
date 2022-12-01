@@ -5,9 +5,6 @@ import { FetchModelShelf } from "@startapp/mobx-utils/src/global";
 
 export class Store {
 
-	public fetchMovie: FetchModelShelf<IMovie>;
-	public fetchTrailer: FetchModelShelf<ITrailer>;
-
 	constructor(id: string) {
 		makeAutoObservable(this);
 
@@ -25,5 +22,13 @@ export class Store {
 			},
 		);
 	}
+
+	public get pageLoader() {
+		return this.fetchMovie.loader.isLoading || !this.fetchMovie.model.value;
+	}
+
+	public fetchMovie: FetchModelShelf<IMovie>;
+	public fetchTrailer: FetchModelShelf<ITrailer>;
+
 
 }

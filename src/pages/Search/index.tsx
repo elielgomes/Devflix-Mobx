@@ -3,7 +3,7 @@ import { Store } from "./store";
 import useImageColor from "use-image-color";
 import { useSearchParams } from "react-router-dom";
 import { useLocalObservable, observer } from "mobx-react-lite";
-import { Grid, Container, Heading, Box, Flex	} from "@chakra-ui/react";
+import { Grid, Container, Heading, Box, Flex } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 import Loader from "../../components/Loader";
 import MovieCard from "../../components/Cards/MovieCard";
@@ -16,21 +16,22 @@ const Search: React.FC = () => {
 
 	const [searchParams] = useSearchParams();
 	const query = searchParams.get("q") as string;
+	const store = useLocalObservable(() => new Store());
 
 	useEffect(() => {
+		store.queryShelf.setValue(query);
 		store.fetchSearchMovie.fetchPage(1);
 		store.fetchGenreList();
-		store.setRandomImage(1);
 	}, [query]);
 
-	const store = useLocalObservable(() => new Store(query));
+	window.scroll(0, 0);
 
 	const { colors } = useImageColor(
 		store.fetchSearchMovie.items && `${baseUrlImage1280p}${store.fetchSearchMovie?.items[store.random]?.poster_path}`
 		, { cors: true, colors: 2 });
 
 	return (
-		!store.fetchSearchMovie?.items
+		store.pageLoader
 			? (
 				<Container
 					h="100vh"

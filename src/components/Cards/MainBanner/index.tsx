@@ -1,12 +1,13 @@
 import React from "react";
 import { Box, Text, Image, Button, Link, Flex } from "@chakra-ui/react";
 import { Link as ReactLink } from "react-router-dom";
+import { IGenres } from "../../../interfaces";
 
 interface IProps {
 	imageUrl: string;
 	bgColorLoad: string;
 	titleMovie: string;
-	genreMovie: Array<{ id: number; name: string }>;
+	genreMovie?: IGenres[];
 	idMovie: string;
 }
 
@@ -47,7 +48,7 @@ const MainBanner: React.FC<IProps> = (props) => (
 					p="0 20px"
 				>{props.titleMovie && props.titleMovie}
 				</Text>
-				<Text>{props.genreMovie[1]?.name && props.genreMovie[1]?.name !== undefined ? `${props.genreMovie[0]?.name} | ${props.genreMovie[1]?.name}` : `${props.genreMovie[0]?.name}`}</Text>
+				<Text>{props.genreMovie && props.genreMovie[1]?.name !== undefined ? `${props.genreMovie[0]?.name} | ${props.genreMovie[1]?.name}` : `${props.genreMovie && props.genreMovie[0]?.name}`}</Text>
 				<Text
 					textShadow="0x 0px 10px #000"
 					fontSize="20px"

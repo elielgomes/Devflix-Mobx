@@ -19,8 +19,10 @@ const Details: React.FC = () => {
 	const { colors } = useImageColor(store.fetchMovie.model.value?.poster_path && `${baseUrlImage1280p}${store.fetchMovie.model.value.poster_path}`, { cors: true, colors: 4 });
 	const votePorcent = store.fetchMovie.model.value && (store.fetchMovie.model.value.vote_average * 10).toFixed(0);
 
+	window.scroll(0, 0);
+
 	return (
-		!store.fetchMovie.model.value
+		store.pageLoader
 			? (
 				<Container
 					h="100vh"
@@ -51,8 +53,8 @@ const Details: React.FC = () => {
 						</Box>
 						<Box
 							bgImage={{
-								sm: `linear-gradient(to bottom, transparent 0%,${colors && colors[0]} 100%), url(${baseUrlImage1280p}${store.fetchMovie.model.value.backdrop_path ? store.fetchMovie.model.value.backdrop_path : store.fetchMovie.model.value.poster_path})`,
-								lg: `linear-gradient(to left, transparent 0%,${colors && colors[0]} 100%), url(${baseUrlImage1280p}${store.fetchMovie.model.value.backdrop_path ? store.fetchMovie.model.value.backdrop_path : store.fetchMovie.model.value.poster_path})`,
+								sm: `linear-gradient(to bottom, transparent 0%,${colors && colors[0]} 100%), url(${baseUrlImage1280p}${store.fetchMovie.model.value?.backdrop_path ? store.fetchMovie.model.value.backdrop_path : store.fetchMovie.model.value?.poster_path})`,
+								lg: `linear-gradient(to left, transparent 0%,${colors && colors[0]} 100%), url(${baseUrlImage1280p}${store.fetchMovie.model.value?.backdrop_path ? store.fetchMovie.model.value.backdrop_path : store.fetchMovie.model.value?.poster_path})`,
 							}}
 							bgRepeat="no-repeat"
 							bgSize="cover"
