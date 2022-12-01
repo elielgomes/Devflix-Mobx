@@ -10,22 +10,22 @@ import Pagination from "../../components/Buttons/Pagination";
 
 const Top = () => {
 	const store = useLocalObservable(() => new Store());
-	const baseUrlImage1280p = import.meta.env.VITE_BASE_URL_IMAGE_FULL;
 	const baseUrlImage = import.meta.env.VITE_BASE_URL_IMAGE;
+	const baseUrlImage1280p = import.meta.env.VITE_BASE_URL_IMAGE_FULL;
 
 	useEffect(() => {
-		store.fetchTopMovieList(store.page);
 		store.fetchGenreList();
-		store.setRandomImage();
-	}, [store.page]);
+		store.setRandomImage(20);
+		store.fetchTopMovieList.fetchPage(1);
+	}, []);
 
 	const { colors } = useImageColor(
-		store.topMovieList?.results
-		&& `${baseUrlImage1280p}${store.topMovieList.results[store.random].poster_path}`
+		store.fetchTopMovieList?.items
+		&& `${baseUrlImage1280p}${store.fetchTopMovieList.items[store.random]?.poster_path}`
 		, { cors: true, colors: 2 });
 
 	return (
-		!store.topMovieList?.results
+		!store.fetchTopMovieList?.items
 			? (
 				<Container
 					h="100vh"
@@ -40,20 +40,20 @@ const Top = () => {
 				<>
 					<Box w="100%" h="100%" bgColor={colors && colors[0]}>
 						<MainBanner
-							idMovie={`${store.topMovieList?.results[store.topMovieList.results[store.random].backdrop_path ? store.random : 0].id}`}
-							titleMovie={`${store.topMovieList?.results[store.topMovieList.results[store.random].backdrop_path ? store.random : 0].title}`}
+							idMovie={`${store.fetchTopMovieList?.items[store.fetchTopMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.id}`}
+							titleMovie={`${store.fetchTopMovieList?.items[store.fetchTopMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.title}`}
 							genreMovie={
 								store.genreList?.filter((e) => (
-									e.id === store.topMovieList?.results[store.topMovieList.results[store.random].backdrop_path
+									e.id === store.fetchTopMovieList?.items[store.fetchTopMovieList.items[store.random]?.backdrop_path
 										?
 										store.random
-										: 0].genre_ids[0] || e.id === store.topMovieList?.results[store.topMovieList?.results[store.random].backdrop_path
+										: 0]?.genre_ids[0] || e.id === store.fetchTopMovieList?.items[store.fetchTopMovieList?.items[store.random]?.backdrop_path
 										? store.random
-										: 0].genre_ids[1]
+										: 0]?.genre_ids[1]
 								))
 							}
 							bgColorLoad={colors && colors[0]}
-							imageUrl={`${baseUrlImage1280p}${store.topMovieList?.results[store.topMovieList.results[store.random].backdrop_path ? store.random : 0].backdrop_path}`}
+							imageUrl={`${baseUrlImage1280p}${store.fetchTopMovieList?.items[store.fetchTopMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.backdrop_path}`}
 						/>
 						<Container
 							maxW="1500px"
@@ -66,7 +66,7 @@ const Top = () => {
 								gap="100px 60px"
 							>
 								{store.genreList &&
-									store.topMovieList?.results?.map((item) => (
+									store.fetchTopMovieList?.items.map((item) => (
 										<MovieCard
 											key={item.id}
 											title={item.title}
@@ -84,13 +84,13 @@ const Top = () => {
 							</Grid>
 							<Flex justifyContent="center" p="80px 0 0">
 								<Pagination
-									maxPage={store.topMovieList?.total_pages}
-									currentPage={store.page}
-									nextPage={store.page + 1}
-									skipPage={store.page + 2}
-									changePrevPage={() => store.setPage(store.page - 1)}
-									changeNextPage={() => store.setPage(store.page + 1)}
-									changeSkipPage={() => store.setPage(store.page + 2)}
+									maxPage={500}
+									currentPage={store.fetchTopMovieList.page}
+									nextPage={store.fetchTopMovieList.page + 1}
+									skipPage={store.fetchTopMovieList.page + 2}
+									changePrevPage={() => store.fetchTopMovieList.previousPage()}
+									changeNextPage={() => store.fetchTopMovieList.nextPage()}
+									changeSkipPage={() => store.fetchTopMovieList.fetchPage(store.fetchTopMovieList.page + 2)}
 								/>
 							</Flex>
 						</Container>

@@ -30,7 +30,7 @@ const Pagination: React.FC<IProps> = (props) => (
 			</Box>
 			<Box>
 				<Button
-					display={props.currentPage === props.maxPage - 3 ? "none" : "initial"}
+					display={props.currentPage === props.maxPage  ? "none" : "initial"}
 					onClick={props.changeNextPage}
 				>
 					{props.nextPage}
@@ -38,7 +38,7 @@ const Pagination: React.FC<IProps> = (props) => (
 			</Box>
 			<Box>
 				<Button
-					display={props.currentPage === props.maxPage - 2 ? "none" : "initial"}
+					display={props.currentPage >= props.maxPage - 1 ? "none" : "initial"}
 					onClick={props.changeSkipPage}
 				>
 					{props.skipPage}
@@ -46,7 +46,7 @@ const Pagination: React.FC<IProps> = (props) => (
 			</Box>
 			<Box>
 				<Button
-					display={props.currentPage === props.maxPage - 1 ? "none" : "initial"}
+					display={props.currentPage >= props.maxPage - 1 ? "none" : "initial"}
 					onClick={props.changeNextPage}
 				>
 					<FaAngleDoubleRight />

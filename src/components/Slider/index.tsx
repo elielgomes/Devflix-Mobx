@@ -7,11 +7,11 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import MovieCard from "../Cards/MovieCard";
 import { Box, Button, Flex, Text, Link } from "@chakra-ui/react";
-import { IMovieList, IGenres} from "../../interfaces";
+import { IMovie, IGenres} from "../../interfaces";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 interface IProps {
-	movieListSlider?: IMovieList | null;
+	movieListSlider?: IMovie[] | null;
 	color: string;
 	genreList: IGenres[];
 	titleSection: string;
@@ -110,7 +110,7 @@ const Slider: React.FC<IProps> = (props) => {
 					className="mySwiper"
 				>
 					{props.movieListSlider &&
-						props.movieListSlider.results?.map((item) => (
+						props.movieListSlider?.map((item) => (
 
 							<SwiperSlide key={item.id}>
 								<MovieCard

@@ -12,21 +12,20 @@ const Home: React.FC = () => {
 	const baseUrlImage1280p = import.meta.env.VITE_BASE_URL_IMAGE_FULL;
 
 	useLayoutEffect(() => {
-		store.fetchMovieList(1);
-		store.fetchTopMovieList(1);
-		store.fetchUpComingMovieList(1);
 		store.fetchGenreList();
-		store.setRandomImage();
+		store.setRandomImage(20);
+		store.fetchTopMovieList.fetchPage(1);
+		store.fetchPopularMovieList.fetchPage(1);
+		store.fetchUpcomingMovieList.fetchPage(1);
 	}, []);
 
-
 	const { colors } = useImageColor(
-		store.movieList?.results
-		&& `${baseUrlImage1280p}${store.movieList?.results[store.random].poster_path}`
+		store.fetchPopularMovieList.items
+		&& `${baseUrlImage1280p}${store.fetchPopularMovieList.items[store.random]?.poster_path}`
 		, { cors: true, colors: 2 });
 
 	return (
-		!store.movieList?.results && !store.topMovieList?.results
+		!store.fetchPopularMovieList.items && !store.fetchTopMovieList.items
 			? (
 				<Container
 					h="100vh"
@@ -47,20 +46,20 @@ const Home: React.FC = () => {
 					>
 
 						<MainBanner
-							idMovie={`${store.movieList?.results[store.movieList.results[store.random].backdrop_path ? store.random : 0].id}`}
-							titleMovie={`${store.movieList?.results[store.movieList.results[store.random].backdrop_path ? store.random : 0].title}`}
+							idMovie={`${store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.id}`}
+							titleMovie={`${store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.title}`}
 							genreMovie={
 								store.genreList?.filter((e) => (
-									e.id === store.movieList?.results[store.movieList.results[store.random].backdrop_path
+									e.id === store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path
 										?
 										store.random
-										: 0].genre_ids[0] || e.id === store.movieList?.results[store.movieList?.results[store.random].backdrop_path
+										: 0]?.genre_ids[0] || e.id === store.fetchPopularMovieList?.items[store.fetchPopularMovieList?.items[store.random]?.backdrop_path
 										? store.random
-										: 0].genre_ids[1]
+										: 0]?.genre_ids[1]
 								))
 							}
 							bgColorLoad={colors && colors[0]}
-							imageUrl={`${baseUrlImage1280p}${store.movieList?.results[store.movieList.results[store.random].backdrop_path ? store.random : 0].backdrop_path}`}
+							imageUrl={`${baseUrlImage1280p}${store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.backdrop_path}`}
 						/>
 						<Container
 							maxW="1500px"
@@ -76,7 +75,7 @@ const Home: React.FC = () => {
 									titleSection="Top Movies"
 									color={colors && colors[0]}
 									genreList={store.genreList && store.genreList}
-									movieListSlider={store.topMovieList && store.topMovieList}
+									movieListSlider={store.fetchTopMovieList.items && store.fetchTopMovieList.items}
 								/>
 							</Box>
 
@@ -86,7 +85,7 @@ const Home: React.FC = () => {
 									titleSection="Popular Movies"
 									color={colors && colors[0]}
 									genreList={store.genreList && store.genreList}
-									movieListSlider={store.movieList && store.movieList}
+									movieListSlider={store.fetchPopularMovieList.items && store.fetchPopularMovieList.items}
 								/>
 							</Box>
 
@@ -96,7 +95,7 @@ const Home: React.FC = () => {
 									titleSection="Upcoming Movies"
 									color={colors && colors[0]}
 									genreList={store.genreList && store.genreList}
-									movieListSlider={store.upComingMovieList && store.upComingMovieList}
+									movieListSlider={store.fetchUpcomingMovieList.items && store.fetchUpcomingMovieList.items}
 								/>
 							</Box>
 						</Container>

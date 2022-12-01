@@ -11,7 +11,7 @@ export const Text = defineStyleConfig({
 		default: {
 			fontSize: "16px",
 		},
-		titleBrand:{
+		titleBrand: {
 			fontFamily: "Bebas Neue, Bebas, sans-serif",
 			fontWeight: "bolder",
 			color: "rgb(229, 9, 20)",

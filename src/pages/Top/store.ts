@@ -1,58 +1,35 @@
-import { action, makeObservable, observable } from "mobx";
-import GetTopMovieList from "../../apis/getTopMovieList";
-import GetGenreList from "../../apis/getGenreList";
-import { IMovieList, IGenres } from "../../interfaces";
+import { makeAutoObservable } from "mobx";
+import { GetGenreList, GetTopMovieList } from "../../apis/fetchApi";
+import { IMovie, IGenres } from "../../interfaces";
+import { PaginatedListShelf } from "@startapp/mobx-utils";
 
 export class Store {
 	constructor() {
-		makeObservable(this, {
-			page: observable,
-			random: observable,
-			genreList: observable,
-			topMovieList: observable,
-			setRandomImage: action,
-			setTopMovieList: action,
-			setGenreList: action,
-			fetchGenreList: action,
-			fetchTopMovieList: action,
-		});
+		makeAutoObservable(this);
+		this.fetchTopMovieList = new PaginatedListShelf(
+			async (page) => {
+				const response = await GetTopMovieList(page);
+				return response.results;
+			},
+		);
 	}
 
-	public page = 1;
-	public topMovieList: IMovieList | null = null;
 	public random = 0;
+	public fetchTopMovieList: PaginatedListShelf<IMovie>;
 	public genreList: IGenres[] = [{}] as IGenres[];
 
-	public setPage(page: number){
-		this.page = page;
-	}
-
-	public setRandomImage() {
-		this.random = Math.floor(Math.random() * 20);
-	}
-
-	public setTopMovieList(movies: IMovieList) {
-		this.topMovieList = movies;
+	public setRandomImage(results: number) {
+		this.random = Math.floor(Math.random() * results);
 	}
 
 	public setGenreList(genres: IGenres[]) {
 		this.genreList = genres;
 	}
 
-
 	public fetchGenreList = async () => {
 		try {
 			const response = await GetGenreList();
-			this.setGenreList(response.data.genres);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	public fetchTopMovieList = async (page: number) => {
-		try {
-			const response = await GetTopMovieList(page);
-			this.setTopMovieList(response.data);
+			this.setGenreList(response.genres);
 		} catch (error) {
 			console.log(error);
 		}

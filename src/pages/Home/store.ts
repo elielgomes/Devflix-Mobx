@@ -1,87 +1,57 @@
-import { makeAutoObservable	} from "mobx";
-import GetPopularMovieList from "../../apis/getPopularMovieList";
-import GetGenreList from "../../apis/getGenreList";
-import GetTopMovieList from "../../apis/getTopMovieList";
-import GetUpComingMovieList from "../../apis/getUpComingMovies";
-import { IMovie, IMovieList, IGenres} from "../../interfaces";
-import { PaginatedListShelf } from "@startapp/mobx-utils";
-import { AxiosResponse } from "axios";
+import { makeAutoObservable } from "mobx";
+import { GetGenreList, GetPopularMovieList, GetTopMovieList, GetUpcomingMovieList } from "../../apis/fetchApi";
+import { IGenres, IMovie } from "../../interfaces";
+import { PaginatedListShelf, AttributeShelf } from "@startapp/mobx-utils";
 
 export class Store {
-
-	// public fetchPopularMovieList: PaginatedListShelf<AxiosResponse<IMovie, any>>;
 
 	constructor() {
 		makeAutoObservable(this);
 
-		// this.fetchPopularMovieList = new PaginatedListShelf(
-		// 	 (page: number) => GetPopularMovieList(page),
-		// 	{
-		// 		fetchOnConstructor: true,
-		// 	},
-		// );
+		this.fetchPopularMovieList = new PaginatedListShelf(
+			async (page) => {
+				const response = await GetPopularMovieList(page);
+				this.totalPages.setValue(response.total_pages);
+				return response.results;
+			},
+		);
+
+		this.fetchTopMovieList = new PaginatedListShelf(
+			async (page) => {
+				const response = await GetTopMovieList(page);
+				return response.results;
+			},
+		);
+
+		this.fetchUpcomingMovieList = new PaginatedListShelf(
+			async (page) => {
+				const response = await GetUpcomingMovieList(page);
+				return response.results;
+			},
+		);
+
 	}
 
-	public page = 1;
-	public movie: IMovie = {} as IMovie;
-	public movieList: IMovieList | null = null;
-	public topMovieList: IMovieList | null = null;
-	public upComingMovieList: IMovieList | null = null;
 	public random = 0;
 	public genreList: IGenres[] = [{}] as IGenres[];
+	public fetchTopMovieList: PaginatedListShelf<IMovie>;
+	public fetchPopularMovieList: PaginatedListShelf<IMovie>;
+	public fetchUpcomingMovieList: PaginatedListShelf<IMovie>;
+	public totalPages = new AttributeShelf(0);
 
 
-	public setRandomImage() {
-		this.random = Math.floor(Math.random() * 20);
-	}
-
-	public setMovieList(movies: IMovieList) {
-		this.movieList = movies;
+	public setRandomImage(results: number) {
+		this.random = Math.floor(Math.random() * results);
 	}
 
 	public setGenreList(genres: IGenres[]) {
 		this.genreList = genres;
 	}
 
-	public setTopMovieList(movies: IMovieList) {
-		this.topMovieList = movies;
-	}
-
-	public setUpComingMovieList(movies: IMovieList) {
-		this.upComingMovieList = movies;
-	}
-
 	public fetchGenreList = async () => {
 		try {
 			const response = await GetGenreList();
-			this.setGenreList(response.data.genres);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	public fetchMovieList = async (page: number) => {
-		try {
-			const response = await GetPopularMovieList(page);
-			this.setMovieList(response.data);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	public fetchTopMovieList = async (page: number) => {
-		try {
-			const response = await GetTopMovieList(page);
-			this.setTopMovieList(response.data);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	public fetchUpComingMovieList = async (page: number) => {
-		try {
-			const response = await GetUpComingMovieList(page);
-			this.setUpComingMovieList(response.data);
+			this.setGenreList(response.genres);
 		} catch (error) {
 			console.log(error);
 		}

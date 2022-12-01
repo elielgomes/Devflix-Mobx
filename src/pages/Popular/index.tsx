@@ -14,18 +14,18 @@ const Popular = () => {
 	const baseUrlImage1280p = import.meta.env.VITE_BASE_URL_IMAGE_FULL;
 
 	useEffect(() => {
-		store.fetchPopularMovieList(store.page);
 		store.fetchGenreList();
-		store.setRandomImage();
-	}, [store.page]);
+		store.setRandomImage(20);
+		store.fetchPopularMovieList.fetchPage(1);
+	}, []);
 
 	const { colors } = useImageColor(
-		store.popularMovieList?.results
-		&& `${baseUrlImage1280p}${store.popularMovieList.results[store.random].poster_path}`
+		store.fetchPopularMovieList?.items
+		&& `${baseUrlImage1280p}${store.fetchPopularMovieList.items[store.random]?.poster_path}`
 		, { cors: true, colors: 2 });
 
 	return (
-		!store.popularMovieList?.results
+		!store.fetchPopularMovieList?.items
 			? (
 				<Container
 					h="100vh"
@@ -40,20 +40,20 @@ const Popular = () => {
 				<>
 					<Box w="100%" h="100%" bgColor={colors && colors[0]}>
 						<MainBanner
-							idMovie={`${store.popularMovieList?.results[store.popularMovieList.results[store.random].backdrop_path ? store.random : 0].id}`}
-							titleMovie={`${store.popularMovieList?.results[store.popularMovieList.results[store.random].backdrop_path ? store.random : 0].title}`}
+							idMovie={`${store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.id}`}
+							titleMovie={`${store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.title}`}
 							genreMovie={
 								store.genreList?.filter((e) => (
-									e.id === store.popularMovieList?.results[store.popularMovieList.results[store.random].backdrop_path
+									e.id === store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path
 										?
 										store.random
-										: 0].genre_ids[0] || e.id === store.popularMovieList?.results[store.popularMovieList?.results[store.random].backdrop_path
+										: 0]?.genre_ids[0] || e.id === store.fetchPopularMovieList?.items[store.fetchPopularMovieList?.items[store.random]?.backdrop_path
 										? store.random
-										: 0].genre_ids[1]
+										: 0]?.genre_ids[1]
 								))
 							}
 							bgColorLoad={colors && colors[0]}
-							imageUrl={`${baseUrlImage1280p}${store.popularMovieList?.results[store.popularMovieList.results[store.random].backdrop_path ? store.random : 0].backdrop_path}`}
+							imageUrl={`${baseUrlImage1280p}${store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.backdrop_path}`}
 						/>
 						<Container
 							maxW="1500px"
@@ -66,7 +66,7 @@ const Popular = () => {
 								gap="100px 60px"
 							>
 								{store.genreList &&
-									store.popularMovieList?.results?.map((item) => (
+									store.fetchPopularMovieList?.items.map((item) => (
 										<MovieCard
 											key={item.id}
 											title={item.title}
@@ -84,13 +84,13 @@ const Popular = () => {
 							</Grid>
 							<Flex justifyContent="center" p="80px 0 0">
 								<Pagination
-									maxPage={store.popularMovieList?.total_pages}
-									currentPage={store.page}
-									nextPage={store.page + 1}
-									skipPage={store.page + 2}
-									changePrevPage={() => store.setPage(store.page - 1)}
-									changeNextPage={() => store.setPage(store.page + 1)}
-									changeSkipPage={() => store.setPage(store.page + 2)}
+									maxPage={500}
+									currentPage={store.fetchPopularMovieList.page}
+									nextPage={store.fetchPopularMovieList.page + 1}
+									skipPage={store.fetchPopularMovieList.page + 2}
+									changePrevPage={() => store.fetchPopularMovieList.previousPage()}
+									changeNextPage={() => store.fetchPopularMovieList.nextPage()}
+									changeSkipPage={() => store.fetchPopularMovieList.fetchPage(store.fetchPopularMovieList.page + 2)}
 								/>
 							</Flex>
 						</Container>
