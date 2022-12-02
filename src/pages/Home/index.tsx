@@ -48,8 +48,7 @@ const Home: React.FC = () => {
 					>
 
 						<MainBanner
-							idMovie={`${store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.id}`}
-							titleMovie={`${store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.title}`}
+							movie={store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]}
 							genreMovie={
 								store.genreList?.filter((e) => (
 									e.id === store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path
@@ -61,7 +60,6 @@ const Home: React.FC = () => {
 								))
 							}
 							bgColorLoad={colors && colors[0]}
-							imageUrl={`${baseUrlImage1280p}${store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.backdrop_path}`}
 						/>
 						<Container
 							maxW="1500px"
@@ -76,8 +74,8 @@ const Home: React.FC = () => {
 									urlSection="/top"
 									titleSection="Top Movies"
 									color={colors && colors[0]}
-									genreList={store.genreList && store.genreList}
-									movieListSlider={store.fetchTopMovieList.items && store.fetchTopMovieList.items}
+									genreList={store.genreList}
+									movieListSlider={store.fetchTopMovieList.items}
 								/>
 							</Box>
 
@@ -86,8 +84,8 @@ const Home: React.FC = () => {
 									urlSection="/popular"
 									titleSection="Popular Movies"
 									color={colors && colors[0]}
-									genreList={store.genreList && store.genreList}
-									movieListSlider={store.fetchPopularMovieList.items && store.fetchPopularMovieList.items}
+									genreList={store.genreList}
+									movieListSlider={store.fetchPopularMovieList.items}
 								/>
 							</Box>
 
@@ -96,8 +94,8 @@ const Home: React.FC = () => {
 									urlSection="/upcoming"
 									titleSection="Upcoming Movies"
 									color={colors && colors[0]}
-									genreList={store.genreList && store.genreList}
-									movieListSlider={store.fetchUpcomingMovieList.items && store.fetchUpcomingMovieList.items}
+									genreList={store.genreList}
+									movieListSlider={store.fetchUpcomingMovieList.items}
 								/>
 							</Box>
 						</Container>

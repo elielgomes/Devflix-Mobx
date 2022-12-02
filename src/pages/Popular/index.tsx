@@ -11,7 +11,6 @@ import GoHome from "../../components/Buttons/GoHome";
 
 const Popular = () => {
 	const store = useLocalObservable(() => new Store());
-	const baseUrlImage = import.meta.env.VITE_BASE_URL_IMAGE;
 	const baseUrlImage1280p = import.meta.env.VITE_BASE_URL_IMAGE_FULL;
 
 	useEffect(() => {
@@ -43,8 +42,7 @@ const Popular = () => {
 				<>
 					<Box w="100%" h="100%" bgColor={colors && colors[0]}>
 						<MainBanner
-							idMovie={`${store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.id}`}
-							titleMovie={`${store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.title}`}
+							movie={store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]}
 							genreMovie={
 								store.genreList?.filter((e) => (
 									e.id === store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path
@@ -56,7 +54,6 @@ const Popular = () => {
 								))
 							}
 							bgColorLoad={colors && colors[0]}
-							imageUrl={`${baseUrlImage1280p}${store.fetchPopularMovieList?.items[store.fetchPopularMovieList.items[store.random]?.backdrop_path ? store.random : 0]?.backdrop_path}`}
 						/>
 						<Container
 							maxW="1500px"
@@ -69,17 +66,13 @@ const Popular = () => {
 								gap="100px 60px"
 							>
 								{store.genreList &&
-									store.fetchPopularMovieList?.items.map((item) => (
+									store.fetchPopularMovieList?.items?.map((item) => (
 										<MovieCard
 											key={item.id}
-											title={item.title}
-											id={item.id}
-											imageUrl={`${baseUrlImage}${item.poster_path}`}
+											movie={item}
 											genre={store.genreList?.find((e) => e.id === item.genre_ids[0])?.name === "Triller"
 												? "Suspense"
 												: store.genreList?.find((e) => e.id === item.genre_ids[0])?.name}
-											releaseDate={String(new Date(item.release_date).getFullYear())}
-											voteAverage={`${item.vote_average}`}
 											color={colors && colors[0]}
 										/>
 									),

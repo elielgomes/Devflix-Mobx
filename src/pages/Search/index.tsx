@@ -13,7 +13,6 @@ import GoHome from "../../components/Buttons/GoHome";
 
 const Search: React.FC = () => {
 	const baseUrlImage1280p = import.meta.env.VITE_BASE_URL_IMAGE_FULL;
-	const baseUrlImage = import.meta.env.VITE_BASE_URL_IMAGE;
 
 	const [searchParams] = useSearchParams();
 	const query = searchParams.get("q") as string;
@@ -48,8 +47,7 @@ const Search: React.FC = () => {
 					<Box w="100%" h="100%" bgColor={colors && store.fetchSearchMovie?.items?.length !== 0 ? colors[0] : "#000"}>
 						{store.fetchSearchMovie?.items?.length !== 0 &&
 							<MainBanner
-								idMovie={`${store.fetchSearchMovie?.items[store.fetchSearchMovie.items[store.random]?.backdrop_path ? store.random : 0]?.id}`}
-								titleMovie={`${store.fetchSearchMovie?.items[store.fetchSearchMovie.items[store.random]?.backdrop_path ? store.random : 0]?.title}`}
+								movie={store.fetchSearchMovie?.items[store.fetchSearchMovie.items[store.random]?.backdrop_path ? store.random : 0]}
 								genreMovie={
 									store.genreList?.filter((e) => (
 										e.id === store.fetchSearchMovie?.items[store.fetchSearchMovie.items[store.random]?.backdrop_path
@@ -61,7 +59,6 @@ const Search: React.FC = () => {
 									))
 								}
 								bgColorLoad={colors && colors[0]}
-								imageUrl={`${baseUrlImage1280p}${store.fetchSearchMovie?.items[store.fetchSearchMovie.items[store.random]?.backdrop_path ? store.random : 0]?.backdrop_path}`}
 							/>}
 
 						<Container
@@ -87,14 +84,10 @@ const Search: React.FC = () => {
 									store.fetchSearchMovie?.items?.map((item) => (
 										<MovieCard
 											key={item.id}
-											title={item.title}
-											id={item.id}
-											imageUrl={item.poster_path ? `${baseUrlImage}${item.poster_path}` : "/assets/image/undefined-card.png"}
+											movie={item}
 											genre={store.genreList?.find((e) => e.id === item.genre_ids[0])?.name === "Triller"
 												? "Suspense"
 												: store.genreList?.find((e) => e.id === item.genre_ids[0])?.name}
-											releaseDate={String(new Date(item.release_date).getFullYear())}
-											voteAverage={`${item.vote_average}`}
 											color={colors && colors[0]}
 										/>
 									),

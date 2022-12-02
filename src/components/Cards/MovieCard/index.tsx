@@ -2,20 +2,18 @@ import React from "react";
 import { Link, Text, GridItem, Box, Image, Flex } from "@chakra-ui/react";
 import { Link as ReactLink } from "react-router-dom";
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
+import { IMovie } from "../../../interfaces";
 
 interface IProps {
-	id: string;
-	title: string;
-	imageUrl: string;
+	movie: IMovie;
 	genre?: string | null;
-	releaseDate: string;
-	voteAverage: string;
 	color: string;
 }
 
 const MovieCard: React.FC<IProps> = (props) => {
 
-	const star = Number(props.voteAverage) / 2;
+	const baseUrlImage = import.meta.env.VITE_BASE_URL_IMAGE;
+	const star = Number(props.movie?.vote_average) / 2;
 	const arrStars = [];
 	const starHalf = star.toFixed(1);
 
@@ -36,7 +34,7 @@ const MovieCard: React.FC<IProps> = (props) => {
 	return (
 		<>
 			<GridItem display="flex" flexDirection="column" alignItems="center">
-				<Link as={ReactLink} to={`/details/${props.id}`}>
+				<Link as={ReactLink} to={`/details/${props.movie?.id}`}>
 					<Flex
 						h="425px"
 						w="210px"
@@ -74,7 +72,7 @@ const MovieCard: React.FC<IProps> = (props) => {
 						>
 							<Image
 								className="imageCard"
-								src={props.imageUrl}
+								src={`${baseUrlImage}${props.movie?.poster_path}`}
 								maxW="200%"
 								w="auto"
 								height="100%"
@@ -96,7 +94,7 @@ const MovieCard: React.FC<IProps> = (props) => {
 								overflow="hidden"
 								whiteSpace="nowrap"
 								padding="10px 15px 0"
-							>{props.title}
+							>{props.movie?.title}
 							</Text>
 							<Text>{props.genre === "Thriller" ? "Suspense" : `${props.genre}`}</Text>
 							<Flex
@@ -121,7 +119,7 @@ const MovieCard: React.FC<IProps> = (props) => {
 									className="release-date"
 									w="100%"
 									display="none"
-								>{props.releaseDate}
+								>{String(new Date(props.movie?.release_date).getFullYear())}
 								</Text>
 							</Flex>
 						</Box>

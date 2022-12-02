@@ -20,7 +20,6 @@ interface IProps {
 
 const Slider: React.FC<IProps> = (props) => {
 
-	const baseUrlImage = import.meta.env.VITE_BASE_URL_IMAGE;
 	const swiperRef = useRef<SwiperCore>();
 
 	return (
@@ -114,13 +113,9 @@ const Slider: React.FC<IProps> = (props) => {
 
 							<SwiperSlide key={item.id}>
 								<MovieCard
+									movie={item}
 									key={item.id}
-									title={item.title}
-									id={item.id}
-									imageUrl={`${baseUrlImage}${item.poster_path}`}
 									genre={props.genreList && props.genreList?.find((e) => e.id === item.genre_ids[0])?.name}
-									releaseDate={String(new Date(item.release_date).getFullYear())}
-									voteAverage={`${item.vote_average}`}
 									color={props.color}
 								/>
 							</SwiperSlide>
