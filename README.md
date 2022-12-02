@@ -11,25 +11,27 @@
 
 # 🔍 Indice
 
-* [Badges](https://github.com/elielgomes/Devflix/blob/master/README.md#%EF%B8%8F-badges)
-* [Índice](https://github.com/elielgomes/Devflix/blob/master/README.md#-indice)
-* [Descrição do Projeto](https://github.com/elielgomes/Devflix/blob/master/README.md#%EF%B8%8F-descri%C3%A7%C3%A3o-do-projeto)
-* [Status do Projeto](https://github.com/elielgomes/Devflix/blob/master/README.md#-status-do-projeto)
-* [Funcionalidades e Demonstração da Aplicação](https://github.com/elielgomes/Devflix/blob/master/README.md#%EF%B8%8F-funcionalidades-e-demonstra%C3%A7%C3%A3o-da-aplica%C3%A7%C3%A3o)
+* [Badges](https://github.com/elielgomes/Devflix-Mobx/blob/master/README.md#%EF%B8%8F-badges)
+* [Índice](https://github.com/elielgomes/Devflix-Mobx/blob/master/README.md#-indice)
+* [Descrição do Projeto](https://github.com/elielgomes/Devflix-Mobx/blob/master/README.md#%EF%B8%8F-descri%C3%A7%C3%A3o-do-projeto)
+* [Status do Projeto](https://github.com/elielgomes/Devflix-Mobx/blob/master/README.md#-status-do-projeto)
+* [Funcionalidades e Demonstração da Aplicação](https://github.com/elielgomes/Devflix-Mobx/blob/master/README.md#%EF%B8%8F-funcionalidades-e-demonstra%C3%A7%C3%A3o-da-aplica%C3%A7%C3%A3o)
 * [Acesso ao Projeto](https://github.com/elielgomes/Devflix/blob/master/README.md#-acesso-ao-projeto)
 * [Tecnologias utilizadas](https://github.com/elielgomes/Devflix/blob/master/README.md#-tecnologias-utilizadas)
 
 
 # ✏️ Descrição do Projeto
 
-O projeto teve como objetivos fundamentais:
-- Criar uma aplicação simulando um serviço de streaming utilizando TypeScript e ReactJs.
-- Criar uma lista de objetos renderizada assincronamente através do consumo de uma API externa.
-- Implementar um sistema de busca que deve ser feito 2s após o usuário parar de digitar.
-- Adicionar eventos/animações de carregamento enquanto o usuário aguarda a resposta da API.
-- Responsividade da página nos principais breakpoints.
-- Implementar um sistema de páginação.
-- Criar um sistema de rotas dinâmicas.
+- O projeto é totalmente dinâmico, a cada interação que o usuário faz com a aplicação o tema é totalmente modificado, alterando o filme em destaque e identificando a principal cor do filme e alterando a cor de fundo.
+
+-Principais objetivos:
+Criar uma aplicação simulando um serviço de streaming utilizando TypeScript, ReactJs, MobX e Chakra UI.
+Criar uma lista de objetos renderizada assincronamente através do consumo de uma API externa.
+Implementar um sistema de busca que deve ser feito 2s após o usuário parar de digitar.
+Adicionar eventos/animações de carregamento enquanto o usuário aguarda a resposta da API.
+Responsividade da página nos principais breakpoints.
+Implementar um sistema de páginação.
+Criar um sistema de rotas dinâmicas.
 
 # 📈 Status do Projeto
 ![Frame 16](https://user-images.githubusercontent.com/108281436/192803852-d0a0e110-a351-4eb9-ad0e-95cb36a0bb49.png)
