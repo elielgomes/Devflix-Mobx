@@ -56,8 +56,8 @@ O projeto teve como objetivos fundamentais:
 
 # 🔑 Acesso ao Projeto
 
-[![Acesso](https://user-images.githubusercontent.com/108281436/192802838-0c7abeda-f41a-4c34-86c7-ead30e2b223c.png)](https://devflix-brasil.vercel.app/) <br>
-ou acesse direto pelo link https://devflix-brasil.vercel.app/
+[![Acesso](https://user-images.githubusercontent.com/108281436/192802838-0c7abeda-f41a-4c34-86c7-ead30e2b223c.png)](https://devflix-eight.vercel.app/) <br>
+ou acesse direto pelo link https://devflix-eight.vercel.app/
 
 # 👨🏻‍💻 Tecnologias utilizadas
 <div align='start'>
