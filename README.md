@@ -1,7 +1,7 @@
 # Devflix
 
 <p align='center'>
-  <img src='https://user-images.githubusercontent.com/108281436/200326018-263ab314-fe6f-4013-974a-53820b61f661.png'/>
+  <img src='https://user-images.githubusercontent.com/108281436/205342374-909c139e-cead-4b95-bd29-4e6979e44821.png'/>
 <p/>
 
 
