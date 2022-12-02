@@ -68,6 +68,8 @@ ou acesse direto pelo link https://devflix-brasil.vercel.app/
 
 <img width=60 heigth=60 src="https://user-images.githubusercontent.com/108281436/205324695-eef946cd-1fe6-4c7f-8404-b181fec6fda0.png" />
 
+<img width=60 heigth=60 src="https://user-images.githubusercontent.com/108281436/205325896-cc8dd048-ebb4-4455-99ed-af81caf81410.png" />
+
 <img width=60 heigth=60 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" />
 
 <img width=60 heigth=60 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
@@ -79,8 +81,6 @@ ou acesse direto pelo link https://devflix-brasil.vercel.app/
 <img width=60 heigth=60 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" />
 
 <img width=60 heigth=60 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" />
-
-
 
 </div>
           
