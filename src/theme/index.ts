@@ -10,7 +10,7 @@ const customTheme = extendTheme({
 	styles: {
 		global: {
 			"html": {
-				scrollBehavior: "smooth",
+				scrollBehavior: "instant",
 			},
 			"body": {
 				backgroundColor: "#000",

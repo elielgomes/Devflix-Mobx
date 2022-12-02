@@ -9,6 +9,7 @@ import Loader from "../../components/Loader";
 import MovieCard from "../../components/Cards/MovieCard";
 import MainBanner from "../../components/Cards/MainBanner";
 import Pagination from "../../components/Buttons/Pagination";
+import GoHome from "../../components/Buttons/GoHome";
 
 const Search: React.FC = () => {
 	const baseUrlImage1280p = import.meta.env.VITE_BASE_URL_IMAGE_FULL;
@@ -114,6 +115,7 @@ const Search: React.FC = () => {
 								</Flex>}
 						</Container>
 					</Box>
+					<GoHome />
 				</>
 			)
 	);

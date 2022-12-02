@@ -7,6 +7,7 @@ import Loader from "../../components/Loader";
 import MovieCard from "../../components/Cards/MovieCard";
 import MainBanner from "../../components/Cards/MainBanner";
 import Pagination from "../../components/Buttons/Pagination";
+import GoHome from "../../components/Buttons/GoHome";
 
 const Top = () => {
 	const store = useLocalObservable(() => new Store());
@@ -97,6 +98,7 @@ const Top = () => {
 							</Flex>
 						</Container>
 					</Box>
+					<GoHome />
 				</>
 			)
 	);

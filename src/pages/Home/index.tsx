@@ -19,7 +19,7 @@ const Home: React.FC = () => {
 		store.fetchUpcomingMovieList.fetchPage(1);
 	}, []);
 
-	window.scroll(0, 0);
+	window.scrollTo(0, 0);
 
 	const { colors } = useImageColor(
 		store.fetchPopularMovieList.items

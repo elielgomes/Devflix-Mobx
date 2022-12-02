@@ -19,7 +19,7 @@ const Details: React.FC = () => {
 	const { colors } = useImageColor(store.fetchMovie.model.value?.poster_path && `${baseUrlImage1280p}${store.fetchMovie.model.value.poster_path}`, { cors: true, colors: 4 });
 	const votePorcent = store.fetchMovie.model.value && (store.fetchMovie.model.value.vote_average * 10).toFixed(0);
 
-	window.scroll(0, 0);
+	window.scrollTo(0, 0);
 
 	return (
 		store.pageLoader
