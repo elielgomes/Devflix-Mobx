@@ -62,7 +62,7 @@ ou acesse direto pelo link https://devflix-brasil.vercel.app/
 # 👨🏻‍💻 Tecnologias utilizadas
 <div align='start'>
 
-<img width=60 heigth=60 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />
+<img width=60 heigth=60 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"  style="border-radius:50%" />
 
 <img width=60 heigth=60 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" />
 
