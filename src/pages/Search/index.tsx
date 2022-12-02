@@ -106,8 +106,6 @@ const Search: React.FC = () => {
 									<Pagination
 										maxPage={store.totalPages.value}
 										currentPage={store.fetchSearchMovie.page}
-										nextPage={store.fetchSearchMovie.page + 1}
-										skipPage={store.fetchSearchMovie.page + 2}
 										changePrevPage={() => store.fetchSearchMovie.previousPage()}
 										changeNextPage={() => store.fetchSearchMovie.nextPage()}
 										changeSkipPage={() => store.fetchSearchMovie.fetchPage(store.fetchSearchMovie.page + 2)}

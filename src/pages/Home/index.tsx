@@ -13,7 +13,7 @@ const Home: React.FC = () => {
 
 	useLayoutEffect(() => {
 		store.fetchGenreList();
-		store.setRandomImage(20);
+		store.setRandomImage(19);
 		store.fetchTopMovieList.fetchPage(1);
 		store.fetchPopularMovieList.fetchPage(1);
 		store.fetchUpcomingMovieList.fetchPage(1);

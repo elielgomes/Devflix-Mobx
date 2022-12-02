@@ -16,7 +16,7 @@ const Top = () => {
 
 	useEffect(() => {
 		store.fetchGenreList();
-		store.setRandomImage(20);
+		store.setRandomImage(19);
 		store.fetchUpcomingMovieList.fetchPage(1);
 	}, []);
 
@@ -89,8 +89,6 @@ const Top = () => {
 								<Pagination
 									maxPage={500}
 									currentPage={store.fetchUpcomingMovieList.page}
-									nextPage={store.fetchUpcomingMovieList.page + 1}
-									skipPage={store.fetchUpcomingMovieList.page + 2}
 									changePrevPage={() => store.fetchUpcomingMovieList.previousPage()}
 									changeNextPage={() => store.fetchUpcomingMovieList.nextPage()}
 									changeSkipPage={() => store.fetchUpcomingMovieList.fetchPage(store.fetchUpcomingMovieList.page + 2)}

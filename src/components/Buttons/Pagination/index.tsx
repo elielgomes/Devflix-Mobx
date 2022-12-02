@@ -7,8 +7,6 @@ interface IProps {
 	changeNextPage: () => void;
 	changeSkipPage: () => void;
 	currentPage: number;
-	nextPage: number;
-	skipPage: number;
 	maxPage: number;
 }
 
@@ -33,7 +31,7 @@ const Pagination: React.FC<IProps> = (props) => (
 					display={props.currentPage === props.maxPage  ? "none" : "initial"}
 					onClick={props.changeNextPage}
 				>
-					{props.nextPage}
+					{props.currentPage + 1}
 				</Button>
 			</Box>
 			<Box>
@@ -41,7 +39,7 @@ const Pagination: React.FC<IProps> = (props) => (
 					display={props.currentPage >= props.maxPage - 1 ? "none" : "initial"}
 					onClick={props.changeSkipPage}
 				>
-					{props.skipPage}
+					{props.currentPage + 2}
 				</Button>
 			</Box>
 			<Box>

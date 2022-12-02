@@ -12,7 +12,7 @@ export class Store {
 			async (page) => {
 				const response = await GetSearchMovies(this.queryShelf.value, page);
 				this.totalPages.setValue(response.total_pages);
-				this.setRandomImage(response.results.length);
+				this.setRandomImage(response.results.length - 1);
 				return response.results;
 			},
 		);
