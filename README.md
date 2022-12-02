@@ -50,7 +50,7 @@ O projeto teve como objetivos fundamentais:
 </h2> 
 
 <p align='center'>
-  <img src="https://user-images.githubusercontent.com/108281436/200361644-0f7a72fa-fa4b-4b51-bf07-e648e1e44332.png"/>
+  <img src="https://user-images.githubusercontent.com/108281436/205339820-fe1680d5-c359-4824-be43-ef1da4965a8a.png"/>
 </p>
     
 
