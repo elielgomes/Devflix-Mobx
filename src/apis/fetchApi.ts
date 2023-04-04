@@ -1,4 +1,4 @@
-import { IMovieList, ITrailer, IMovie, IGenreList} from "../interfaces";
+import { IMovieList, ITrailer, IMovie, IGenreList } from "../interfaces";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const baseUrlGenres = import.meta.env.VITE_BASE_URL_GENRES;
@@ -18,7 +18,7 @@ export const GetGenreList = async () => {
 };
 
 export const GetSearchMovies = async (query: string, page: number) => {
-	const response = await fetch(`${baseUrlSearch}?${apiKey}&query=${query}&language=pt-br&page=${page}`);
+	const response = await fetch(`${baseUrlSearch}?${apiKey}&language=pt-br&page=${page}&include_adult=false&query=${query}`);
 	const data: IMovieList = await response.json();
 	return data;
 };
