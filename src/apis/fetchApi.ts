@@ -3,7 +3,7 @@ import { IMovieList, ITrailer, IMovie, IGenreList } from "../interfaces";
 const apiKey = import.meta.env.VITE_API_KEY;
 const baseUrlGenres = import.meta.env.VITE_BASE_URL_GENRES;
 const baseUrlMovie = import.meta.env.VITE_BASE_URL_MOVIE;
-const baseUrlSearch = import.meta.env.VITE_BASE_URL_SEARCH;
+// const baseUrlSearch = import.meta.env.VITE_BASE_URL_SEARCH;
 
 export const GetTrailer = async (id: string) => {
 	const response = await fetch(`${baseUrlMovie}${id}/videos?${apiKey}&language=pt-br`);
@@ -18,7 +18,7 @@ export const GetGenreList = async () => {
 };
 
 export const GetSearchMovies = async (query: string, page: number) => {
-	const response = await fetch(`${baseUrlSearch}?${apiKey}&language=pt-br&page=${page}&include_adult=false&query=${query}`);
+	const response = await fetch(`https://api.themoviedb.org/3/search/movie?${apiKey}&query=${query}&include_adult=false&language=pt-br&page=${page}`);
 	const data: IMovieList = await response.json();
 	return data;
 };
