@@ -18,7 +18,7 @@ export const GetGenreList = async () => {
 };
 
 export const GetSearchMovies = async (query: string, page: number) => {
-	const response = await fetch(`${baseUrlSearch}?${apiKey}&language=pt-br&page=${page}&include_adult=false&query=${query}`);
+	const response = await fetch(`${baseUrlSearch}?${apiKey}&query=${query}&include_adult=false&language=pt-br&page=${page}`);
 	const data: IMovieList = await response.json();
 	return data;
 };
